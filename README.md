@@ -66,7 +66,6 @@ _(Wasn't sure which set of "rules" were being requested. Included NSG rules and 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
 | Home_to_JumpBox | Yes          | (My home IP) 98.198.82.18 |
-| JumpBox-SSH     | No           | 10.0.0.5 (Jumpbox) |
 | Host_to_VNet    | No           | (My home IP) 98.198.82.18 |
 | Jumpbox   | Yes     |  (My home IP) 98.198.82.18|
 | Web -1 | No  | 10.0.0.5 (Jumpbox) |
