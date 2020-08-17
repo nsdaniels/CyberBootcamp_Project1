@@ -1,0 +1,29 @@
+---
+- name: Configure webservers with filebeat
+  hosts: webservers
+  become: true
+  tasks:
+    # Downloads dkpg file from Filebeat Website
+    - name: Download Deb file from filebeat
+      command: curl -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+    
+    # Installs .deb file onto webservers
+    - name: deb file installation
+      command: dpkg -i filebeat-7.4.0-amd64.deb
+
+    # Copies filebeat config file
+    - name: Copy filebeat configuation file
+      copy: 
+        src: /etc/ansible/roles/files/filebeat-configuration.yml
+        dest: /etc/filebeat/filebeat.yml
+
+    # Filebeat Enable & Setup
+    - name: Enables Filebeat
+      command: filebeat modules enable system
+
+    - name: Filebeat Setup
+      command: filebeat setup
+
+    - name: Filebeat start
+      command: sudo service filebeat start 
+      

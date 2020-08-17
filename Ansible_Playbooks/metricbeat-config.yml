@@ -1,0 +1,100 @@
+Last login: Tue Aug 11 18:30:37 on console
+nick@Nicolass-MacBook-Pro ~ % cd .ssh
+nick@Nicolass-MacBook-Pro .ssh % ssh azadmin@40.74.234.152
+The authenticity of host '40.74.234.152 (40.74.234.152)' can't be established.
+ECDSA key fingerprint is SHA256:k1/E5p5lmWjYLcCx9st8/0rofMpCVEy/kUIf9TGLrz8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '40.74.234.152' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.3.0-1034-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ System information disabled due to load higher than 1.0
+
+ * Are you ready for Kubernetes 1.19? It's nearly here! Try RC3 with
+   sudo snap install microk8s --channel=1.19/candidate --classic
+
+   https://microk8s.io/ has docs and details.
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+15 packages can be updated.
+0 updates are security updates.
+
+
+Last login: Mon Aug 10 18:39:22 2020 from 98.198.82.18
+azadmin@Jump-Box-Provisioner:~$ sudo docker container list -a
+CONTAINER ID        IMAGE                           COMMAND             CREATED             STATUS                      PORTS               NAMES
+8d3e5f6d7819        cyberxsecurity/ansible:latest   "bash"              10 days ago         Exited (0) 10 days ago                          cranky_cerf
+cff23bf8143a        cyberxsecurity/ansible          "bash"              10 days ago         Exited (0) 10 days ago                          gracious_northcutt
+3ef2fdb74e8c        cyberxsecurity/ansible          "bash"              10 days ago         Exited (0) 10 days ago                          elated_shtern
+cc11d56cfe27        cyberxsecurity/ansible          "bash"              10 days ago         Exited (137) 30 hours ago                       eloquent_keller
+e49d5762e5b6        cyberxsecurity/ubuntu:bionic    "bash"              10 days ago         Exited (127) 10 days ago                        quirky_gould
+azadmin@Jump-Box-Provisioner:~$ sudo docker start eloquent_keller
+eloquent_keller
+azadmin@Jump-Box-Provisioner:~$ sudo docker attach eloquent_keller
+root@cc11d56cfe27:~# cd /etc/ansible
+root@cc11d56cfe27:/etc/ansible# ls
+ansible.cfg  hosts  install-elk.yml  my_playlist.yml  roles
+root@cc11d56cfe27:/etc/ansible# ansible-playbook my_playlist.yml 
+
+PLAY [Config Web VM with docker] ***********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.0.13]
+ok: [10.0.0.12]
+
+TASK [docker.io] ***************************************************************
+ok: [10.0.0.12]
+ok: [10.0.0.13]
+
+TASK [pip3] ********************************************************************
+ok: [10.0.0.12]
+ok: [10.0.0.13]
+
+TASK [Docker module] ***********************************************************
+ok: [10.0.0.12]
+ok: [10.0.0.13]
+
+TASK [download and launch a docker web container] ******************************
+ok: [10.0.0.12]
+ok: [10.0.0.13]
+
+PLAY RECAP *********************************************************************
+10.0.0.12                  : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+10.0.0.13                  : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+root@cc11d56cfe27:/etc/ansible# cd roles/files/
+root@cc11d56cfe27:/etc/ansible/roles/files# ls
+filebeat-configuration.yml  filebeat_test-playbook.yml  metricbeat-playbook.yml
+filebeat-playbook.yml       metricbeat-config.yml
+root@cc11d56cfe27:/etc/ansible/roles/files# nano metricbeat-config.yml 
+
+  GNU nano 2.9.3                metricbeat-config.yml                           
+
+#logging.level: debug
+
+# At debug level, you can selectively enable logging only for some components.
+# To enable all selectors use ["*"]. Examples of other selectors are "beat",
+# "publish", "service".
+#logging.selectors: ["*"]
+
+#============================== X-Pack Monitoring =============================$
+# metricbeat can export internal metrics to a central Elasticsearch monitoring
+# cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
+# reporting is disabled by default.
+
+# Set to true to enable the monitoring reporter.
+#monitoring.enabled: false
+
+# Sets the UUID of the Elasticsearch cluster under which monitoring data for th$
+# Metricbeat instance will appear in the Stack Monitoring UI. If output.elastic$
+# is enabled, the UUID is derived from the Elasticsearch cluster referenced by $
+#monitoring.cluster_uuid:
+
+^G Get Help  ^O Write Out ^W Where Is  ^K Cut Text  ^J Justify   ^C Cur Pos
+^X Exit      ^R Read File ^\ Replace   ^U Uncut Text^T To Spell  ^_ Go To Line
