@@ -92,17 +92,17 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- _List the IP addresses of the machines you are monitoring_
   - 10.0.0.12
   - 10.0.0.13 
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- _Specify which Beats you successfully installed_
   - Filebeat
   - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- _In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
   - Filebeat collects information on all syslog data in real time for both Web - 1 and Web - 2 (webserver VMs). It will display all syslog event data
   - Metricbeat collects information about the Docker containers running on both Web - 1 and Web - 2 (webserver VMs). The type of information you should expect to find in Metricbeat is Docker containers per host (webserver) and the name/image data of those docker containers.
 
@@ -114,7 +114,7 @@ SSH into the control node and follow the steps below:
 - Update the _configuration_ file to include _Kibana private IP_.
 - Run the playbook, and navigate to _Kibana_ to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
+_Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
   - [filebeat-playbook.yml](Ansible_Playbooks/filebeat-playbook.yml)
   - [metricbeat-playbook.yml](Ansible_Playbooks/metricbeat-playbook.yml)
