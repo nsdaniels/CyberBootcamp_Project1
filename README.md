@@ -38,7 +38,7 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
   - Metricbeat tracks machine usage data
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
@@ -61,7 +61,7 @@ Machines within the network can only be accessed by _The JumpBox_.
 
 A summary of the access policies in place can be found in the table below.
 
-_(Wasn't sure which set of "rules" were being requested. Included NSG rules and rules for each VM)_
+
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
@@ -79,7 +79,6 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
   - This process is easily repeatable across multiple machines, if needed. It also makes the process of changing configuration settings as simple as setup.  
 
 The playbook implements the following tasks:
-- _In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
   - Install Docker to ELK VM via Ubuntu repository
   - Install Python3 to VM
   - Install Docker module via Python repository
@@ -102,7 +101,6 @@ We have installed the following Beats on these machines:
   - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
   - Filebeat collects information on all syslog data in real time for both Web - 1 and Web - 2 (webserver VMs). It will display all syslog event data
   - Metricbeat collects information about the Docker containers running on both Web - 1 and Web - 2 (webserver VMs). The type of information you should expect to find in Metricbeat is Docker containers per host (webserver) and the name/image data of those docker containers.
 
